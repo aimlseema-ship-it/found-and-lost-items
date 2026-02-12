@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Lost & Found Match · Recovery System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📦 Lost & Found <span>Match</span></h1>
+            <p class="subhead">Report items, find matches, recover belongings</p>
+        </header>
+
+        <!-- QUICK STATS / counters -->
+        <div class="stats-bar">
+            <div class="stat-card">
+                <span class="stat-label">Lost items</span>
+                <span class="stat-number" id="lost-count">0</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Found items</span>
+                <span class="stat-number" id="found-count">0</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Potential matches</span>
+                <span class="stat-number" id="match-count">0</span>
+            </div>
+        </div>
+
+        <!-- REPORT FORM SECTION (both lost / found) -->
+        <div class="form-panel">
+            <h2>➕ Report an item</h2>
+            <form id="item-form">
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="item-type">I want to report...</label>
+                        <select id="item-type" required>
+                            <option value="" disabled selected>— Select type —</option>
+                            <option value="lost">🔍 Lost item</option>
+                            <option value="found">📌 Found item</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="item-name">Item name</label>
+                        <input type="text" id="item-name" placeholder="e.g. Backpack, Keys, Phone" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="item-desc">Description</label>
+                        <input type="text" id="item-desc" placeholder="colour, brand, distinctive features">
+                    </div>
+                    <div class="input-group">
+                        <label for="item-date">Date</label>
+                        <input type="date" id="item-date" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="item-location">Location</label>
+                        <input type="text" id="item-location" placeholder="where was it lost/found?" required>
+                    </div>
+                    <div class="input-group full-width-btn">
+                        <button type="submit" id="submit-btn">➕ Add item</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- SEARCH & FILTER TOOLBAR -->
+        <div class="search-toolbar">
+            <div class="search-wrapper">
+                <label for="search-input">🔎 Search items</label>
+                <input type="text" id="search-input" placeholder="name, description, location ..." autocomplete="off">
+            </div>
+            <div class="filter-group">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="lost">Lost only</button>
+                <button class="filter-btn" data-filter="found">Found only</button>
+                <button class="filter-btn" data-filter="matches">🔗 Show matches</button>
+            </div>
+        </div>
+
+        <!-- TWO-COLUMN LOST & FOUND LIST + MATCH SUGGESTIONS -->
+        <div class="dashboard">
+            <!-- LOST COLUMN -->
+            <div class="column lost-column">
+                <h2>🔍 Lost items <span class="column-badge" id="lost-badge">0</span></h2>
+                <div id="lost-list" class="item-list">
+                    <!-- dynamically populated -->
+                    <div class="empty-message">No lost items reported yet.</div>
+                </div>
+            </div>
+
+            <!-- FOUND COLUMN -->
+            <div class="column found-column">
+                <h2>📌 Found items <span class="column-badge" id="found-badge">0</span></h2>
+                <div id="found-list" class="item-list">
+                    <div class="empty-message">No found items reported yet.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MATCHES PANEL (shown prominently) -->
+        <div class="matches-panel" id="matches-panel">
+            <h2>✨ Potential matches <span id="match-badge">0</span></h2>
+            <div id="matches-list" class="matches-grid">
+                <!-- matched pairs appear here -->
+                <div class="empty-message">No strong matches yet. Report more items!</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- hidden template for match items -->
+    <template id="match-card-template">
+        <div class="match-card">
+            <div class="match-lost">
+                <strong>LOST</strong>
+                <span class="match-name"></span>
+                <span class="match-location"></span>
+                <span class="match-date"></span>
+                <p class="match-desc"></p>
+            </div>
+            <div class="match-divider">⇢</div>
+            <div class="match-found">
+                <strong>FOUND</strong>
+                <span class="match-name"></span>
+                <span class="match-location"></span>
+                <span class="match-date"></span>
+                <p class="match-desc"></p>
+            </div>
+        </div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>
